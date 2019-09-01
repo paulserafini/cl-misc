@@ -20,7 +20,7 @@
 
   ;; Convert the expression to a list of operators and Boolean objects
   (if (stringp expression)
-      (setq expression (read-from-string expression)))
+      (setf expression (read-from-string expression)))
 
   ;; Evaluate inner parentheses first
   (dotimes (i (length expression))
@@ -30,23 +30,23 @@
 
   ;; Evaluate not statements until there are no more
   (loop while (find-x-in-y 'not expression) do
-       (setq i (find-x-in-y 'not expression))
-       (setq expression (nappend (subseq expression 0 i)
+       (setf i (find-x-in-y 'not expression))
+       (setf expression (nappend (subseq expression 0 i)
        				 (not (nth (+ i 1) expression))
        				 (nthcdr (+ i 2) expression))))
 
   ;; Evaluate and statements until there are no more
   (loop while (find-x-in-y 'and expression) do
-       (setq i (find-x-in-y 'and expression))
-       (setq expression (nappend (subseq expression 0 (1- i))
+       (setf i (find-x-in-y 'and expression))
+       (setf expression (nappend (subseq expression 0 (1- i))
   				 (and (nth (1- i) expression)
   				      (nth (1+ i) expression))
   				 (nthcdr (+ i 2) expression))))
 
   ;; Evaluate or statements until there are no more
   (loop while (find-x-in-y 'or expression) do
-       (setq i (find-x-in-y 'or expression))
-       (setq expression (nappend (subseq expression 0 (1- i))
+       (setf i (find-x-in-y 'or expression))
+       (setf expression (nappend (subseq expression 0 (1- i))
   				 (or (nth (1- i) expression)
   				     (nth (1+ i) expression))
   				 (nthcdr (+ i 2) expression))))
@@ -55,5 +55,5 @@
   (second expression))
 
 
-(setq string "(t or nil)")
+(setf string "(t or nil)")
 (evaluate-boolean-expression string)
