@@ -14,13 +14,13 @@
      for char across string
      with i = 0
      if (whitespace-p char) do (incf i)
-     else collect (list i char)))
+     else collect (cons i char)))
 
 (defun split-by-whitespace (string)
   "Convert a whitespace delimited string to a list of strings."
   (let* ((chars (collect-chars string))
 	 (indices (remove-duplicates (mapcar #'first chars))))
     (loop for i in indices collect
-	 (coerce (mapcar #'cadr (massoc i chars)) 'string))))
+	 (coerce (mapcar #'cdr (massoc i chars)) 'string))))
 
 (split-by-whitespace "1990/1/1                   $200.0 = $500.0")
