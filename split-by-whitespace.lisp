@@ -7,7 +7,7 @@
   (or (equal string #\Space)
       (equal string #\Tab)))
 
-(defun collect-letters (string)
+(defun collect-chars (string)
   "Extract non-whitespace characters into an association list, the keys
    of which are a whitespace-delimited enumeration."
   (loop
@@ -18,9 +18,9 @@
 
 (defun split-by-whitespace (string)
   "Convert a whitespace delimited string to a list of strings."
-  (let* ((letters (collect-letters string))
-	 (indices (remove-duplicates (mapcar #'first letters))))
+  (let* ((chars (collect-chars string))
+	 (indices (remove-duplicates (mapcar #'first chars))))
     (loop for i in indices collect
-	 (coerce (mapcar #'cadr (massoc i letters)) 'string))))
+	 (coerce (mapcar #'cadr (massoc i chars)) 'string))))
 
 (split-by-whitespace "1990/1/1                   $200.0 = $500.0")
