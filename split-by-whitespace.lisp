@@ -18,12 +18,9 @@
 
 (defun split-by-whitespace (string)
   "Convert a whitespace delimited string to a list of strings."
+  (let* ((letters (collect-letters string))
+	 (indices (remove-duplicates (mapcar #'first letters))))
+    (loop for i in indices collect
+	 (coerce (mapcar #'cadr (massoc i letters)) 'string))))
 
-  (setf letters (collect-letters string))
-
-  (setf indices (remove-duplicates (mapcar #'first letters)))
-
-  (loop for i in indices collect
-       (coerce (mapcar #'cadr (massoc i letters)) 'string)))
-
-(string-to-list "1990/1/1                   $200.0 = $500.0")
+(split-by-whitespace "1990/1/1                   $200.0 = $500.0")
