@@ -11,12 +11,9 @@
       (or x (list x))
       (list x)))
 
-;; (apply 'append '((a b c) nil (x y z) nil))
 (defun nappend (&rest lists)
   "Merge multiple lists."
-  (loop for list in lists append
-       (ensure-list list)))
-
+  (apply 'append (mapcar 'ensure-list lists)))
 
 (defun evaluate-boolean-expression (expression)
 
