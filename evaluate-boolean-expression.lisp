@@ -11,7 +11,7 @@
       (or x (list x))
       (list x)))
 
-(defun nappend (&rest lists)
+(defun mappend (&rest lists)
   "Merge multiple lists."
   (apply 'append (mapcar 'ensure-list lists)))
 
@@ -32,7 +32,7 @@
      while (find-x-in-y 'not expression)
      do
        (setf i (find-x-in-y 'not expression))
-       (setf expression (nappend (subseq expression 0 i)
+       (setf expression (mappend (subseq expression 0 i)
        				 (not (nth (+ i 1) expression))
        				 (nthcdr (+ i 2) expression))))
 
@@ -41,7 +41,7 @@
      while (find-x-in-y 'and expression)
      do
        (setf i (find-x-in-y 'and expression))
-       (setf expression (nappend (subseq expression 0 (1- i))
+       (setf expression (mappend (subseq expression 0 (1- i))
   				 (and (nth (1- i) expression)
   				      (nth (1+ i) expression))
   				 (nthcdr (+ i 2) expression))))
@@ -51,7 +51,7 @@
      while (find-x-in-y 'or expression)
      do
        (setf i (find-x-in-y 'or expression))
-       (setf expression (nappend (subseq expression 0 (1- i))
+       (setf expression (mappend (subseq expression 0 (1- i))
   				 (or (nth (1- i) expression)
   				     (nth (1+ i) expression))
   				 (nthcdr (+ i 2) expression))))
