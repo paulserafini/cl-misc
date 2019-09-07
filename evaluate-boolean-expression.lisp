@@ -2,8 +2,8 @@
   "Return the index of the first occurrence of X in Y."
   (loop
      for i in y
-     for j from 0 to (length y) do
-     (if (equal i x) (return j))))
+     for j from 0 to (length y)
+     do (if (equal i x) (return j))))
 
 (defun ensure-list (x)
   "If X is not a list or is nil, return it in a list."
@@ -31,14 +31,18 @@
   	      (evaluate-boolean-expression (nth i expression)))))
 
   ;; Evaluate not statements until there are no more
-  (loop while (find-x-in-y 'not expression) do
+  (loop
+     while (find-x-in-y 'not expression)
+     do
        (setf i (find-x-in-y 'not expression))
        (setf expression (nappend (subseq expression 0 i)
        				 (not (nth (+ i 1) expression))
        				 (nthcdr (+ i 2) expression))))
 
   ;; Evaluate and statements until there are no more
-  (loop while (find-x-in-y 'and expression) do
+  (loop
+     while (find-x-in-y 'and expression)
+     do
        (setf i (find-x-in-y 'and expression))
        (setf expression (nappend (subseq expression 0 (1- i))
   				 (and (nth (1- i) expression)
@@ -46,7 +50,9 @@
   				 (nthcdr (+ i 2) expression))))
 
   ;; Evaluate or statements until there are no more
-  (loop while (find-x-in-y 'or expression) do
+  (loop
+     while (find-x-in-y 'or expression)
+     do
        (setf i (find-x-in-y 'or expression))
        (setf expression (nappend (subseq expression 0 (1- i))
   				 (or (nth (1- i) expression)
