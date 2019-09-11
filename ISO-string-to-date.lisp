@@ -5,6 +5,10 @@
      for i below 10
      collect (code-char (+ zero i))))
 
+(defun massoc (key list)
+  "Return the elements of an association list which share a common key."
+  (remove-if-not (lambda (i) (equal (car i) key)) list))
+
 (defun all-digits (string)
   "Verify that every character in a string is a digit."
   (loop
