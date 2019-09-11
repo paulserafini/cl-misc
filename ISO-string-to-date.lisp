@@ -93,4 +93,4 @@
 			  :month (parse-integer month)
 			  :day (parse-integer day))))))
 
-(datep "1990-01-21")
+(ISO-string-to-date "2019-01-01")
