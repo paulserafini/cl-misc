@@ -1,5 +1,4 @@
 (defvar *digits*
-  "A list of digits 0 through 1."
   (loop
      with zero = (char-code #\0)
      for i below 10
