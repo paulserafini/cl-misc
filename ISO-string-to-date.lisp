@@ -14,11 +14,11 @@
   (loop
      for i across string
      unless (member i *digits*) do (return nil)
-     finally (return T)))
+     finally (return string)))
 
 (defun collect-chars (string seperator)
-  "Extract non-whitespace characters into an association list, the keys
-   of which are a whitespace-delimited enumeration."
+  "Extract non-SEPERATOR characters from a STRING into an association list,
+   the keys of which are a SEPERATOR-delimited enumeration."
   (loop
      for char across string
      with i = 0
