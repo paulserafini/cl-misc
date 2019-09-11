@@ -77,6 +77,9 @@
   "Convert an ISO formatted date from a string to a
    list with a 'year', 'month', and 'day' element."
 
+  (unless (stringp string)
+    (return-from ISO-string-to-date nil))
+
   (let* ((contents (split-string string #\-))
 	 (length (length contents))
 	 (year (first contents))
